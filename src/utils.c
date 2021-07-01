@@ -1,15 +1,19 @@
 #include <stdio.h>
 #include <unistd.h>
+#ifdef _WIN32
 #include <libloaderapi.h>
+#endif
 #include "utils.h"
 
+#ifdef _WIN32
 void fix_dir(void) {
     char path[1024], *occ;
     GetModuleFileNameA(NULL, path, 1023);
     occ = strrchr(path, '\\');
     path[occ - path] = '\0';
-    chdir(path); 
+    chdir(path);
 }
+#endif
 
 void save_canvas(int map[MAP_X][MAP_Y], int *posx, int *posy) {
     FILE *fp = fopen("data/save.bin", "wb");

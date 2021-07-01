@@ -153,6 +153,6 @@ void *wire_sim(int map[MAP_X][MAP_Y], int x, int y, int mode) {
             wire_sim(map, x, y-1, 1);
         } else if(map[x][y-1] == cross && map[x][y-2] == lowire) {
             wire_sim(map, x, y-2, 1);
-        } 
+        }
     }
 }
