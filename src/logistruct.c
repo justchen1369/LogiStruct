@@ -24,11 +24,11 @@ int main(void) {
     al_install_keyboard();
     al_install_mouse();
 
-    ALLEGRO_TIMER *timer = al_create_timer(1.0 / 60.0);
-    ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
     al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
     ALLEGRO_DISPLAY *disp = al_create_display(1920, 1080);
+    ALLEGRO_TIMER *timer = al_create_timer(1.0 / 60.0);
 
+    ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_mouse_event_source());
     al_register_event_source(queue, al_get_display_event_source(disp));
@@ -47,6 +47,16 @@ int main(void) {
     al_start_timer(timer);
 
     while(true) {
+      switch (curr) {
+        case exit: printf("exit");
+        break;
+        case menu: printf("menu");
+        break;
+        case settings: printf("settings");
+        break;
+        case canvas: printf("canvas");
+        break;
+      }
       if(curr == menu) {
           ALLEGRO_FONT *font = al_load_ttf_font("data/mont.otf", 32, 0);
   
@@ -252,7 +262,7 @@ int main(void) {
           al_flush_event_queue(queue);
   
       } else if (curr == canvas) {
-          
+          printf("rendering canvas");
           bool grid = false,
           pan = false,
           click = false,
@@ -561,6 +571,6 @@ int main(void) {
               al_destroy_bitmap(nopglst[i].bit);
           }
           al_flush_event_queue(queue);
-      }
+    }
     }
 }
